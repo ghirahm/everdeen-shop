@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Alert from '../utils/Alert';
+import { useNavigate } from 'react-router-dom';
 
 interface ProductPageProps {
     addToCart: (product: { title: string; price: number; quantity: number; image: string }) => void;
@@ -39,6 +40,13 @@ const ProductPage: React.FC<ProductPageProps> = ({ addToCart }) => {
         }
         fetchProductsByCategory();
     }, [selectedCategory]);
+
+    const navigate = useNavigate();
+
+    const handleCardClick = (id: number) => {
+        navigate(`/product/${id}`);
+    };
+
 
     const fetchProducts = async () => {
         setIsLoading(true);
@@ -87,7 +95,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ addToCart }) => {
                         </div>
                         <div className="w-[80%] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 justify-center content-center">
                             {products.map((product) => (
-                                <div key={product.id} className="w-full mx-auto border rounded-lg hover:shadow-md overflow-hidden">
+                                <div key={product.id} onClick={() => handleCardClick(product.id)} className="w-full mx-auto border rounded-lg hover:shadow-md overflow-hidden">
                                     <img src={product.images[0]} alt={product.title} className="w-full h-64 object-cover" />
                                     <div className="h-64 flex flex-col justify-between p-10">
                                         <div className='flex flex-col gap-2'>
@@ -96,7 +104,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ addToCart }) => {
                                         </div>
                                         <div className='flex flex-row justify-between items-center'>
                                             <p className="text-lg font-semibold">${product.price}</p>
-                                            <button onClick={() => addToCart({ title: product.title, price: product.price, quantity: 1, image: product.images[0], })} className='hover:underline'>Add to Cart</button>
+                                            <button onClick={(e) => { e.stopPropagation(); addToCart({title: product.title, price: product.price, quantity: 1, image: product.images[0], }); }} className='hover:underline'>Add to Cart</button>
                                         </div>
                                     </div>
                                 </div>

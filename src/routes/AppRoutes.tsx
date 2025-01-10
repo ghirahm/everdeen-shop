@@ -9,6 +9,7 @@ import LoginPage from '../pages/LoginPage';
 import RegisterPage from '../pages/RegisterPage';
 import CartPage from '../pages/CartPage';
 import PrivateRoute from './PrivateRoute'; 
+import ProductDetails from '../pages/ProductDetails';
 
 const AppRoutes: React.FC = () => {
 
@@ -56,6 +57,7 @@ const AppRoutes: React.FC = () => {
                             </PrivateRoute>
                         }
                     />
+                    <Route path="/product/:id" element={<ProductDetails addToCart={addToCart} />} />
                 </Route>
             </Routes>
         </Router>
