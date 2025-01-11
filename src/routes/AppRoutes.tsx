@@ -14,6 +14,7 @@ import ProductDetails from '../pages/ProductDetails';
 const AppRoutes: React.FC = () => {
 
     const [cart, setCart] = useState<{ title: string; price: number; quantity: number; image: string }[]>([]);
+    const [isCheckOut, setIsCheckOut] = useState<string | null>(null);
 
     const addToCart = (product: { title: string; price: number; quantity: number; image: string }) => {
         setCart((prevCart) => {
@@ -33,8 +34,13 @@ const AppRoutes: React.FC = () => {
     };
 
     const handleCheckout = () => {
-        alert("Proceeding to checkout...");
-        setCart([]);
+        if(cart.length === 0){
+            setIsCheckOut("Your Cart is Empty!");
+        }
+        else{
+            setIsCheckOut("Proceed Check Out!");
+            setCart([]);
+        }
     };
 
     return (
@@ -53,6 +59,8 @@ const AppRoutes: React.FC = () => {
                                     items={cart}
                                     onRemove={removeFromCart}
                                     onCheckout={handleCheckout}
+                                    isCheckOut={isCheckOut}
+                                    setIsCheckOut={setIsCheckOut}
                                 />
                             </PrivateRoute>
                         }

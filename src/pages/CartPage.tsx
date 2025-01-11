@@ -1,14 +1,17 @@
 import React from 'react';
 
 import { useNavigate } from 'react-router-dom';
+import Alert from '../utils/Alert';
 
 interface CartProps {
     items: { title: string; price: number; quantity: number }[];
     onRemove: (title: string) => void;
     onCheckout: () => void;
+    isCheckOut: string | null;
+    setIsCheckOut: (value: string | null) => void;
 }
 
-const CartPage: React.FC<CartProps> = ({ items, onRemove, onCheckout }) => {
+const CartPage: React.FC<CartProps> = ({ items, onRemove, onCheckout, isCheckOut, setIsCheckOut }) => {
 
     const navigate = useNavigate();
 
@@ -16,6 +19,9 @@ const CartPage: React.FC<CartProps> = ({ items, onRemove, onCheckout }) => {
 
     return (
         <div className="flex justify-center items-center h-screen bg-white p-6">
+            {
+                isCheckOut && <Alert isError={isCheckOut} setIsError={() => setIsCheckOut(null)}/>
+            }
             <div className="bg-white border-2 rounded-lg shadow-lg p-6 w-full max-w-lg flex flex-col gap-6">
                 <h2 className="font-semibold text-2xl text-center text-slate-950 mb-4">Shopping Cart</h2>
 

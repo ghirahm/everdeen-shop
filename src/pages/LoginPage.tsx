@@ -67,7 +67,7 @@ const LoginPage: React.FC = () => {
                     <form className='space-y-4' onSubmit={handleSubmit}>
                         <label htmlFor='email' className='flex flex-row items-center gap-2 text-[var(--color-primary)]'>
                             <FontAwesomeIcon icon={faMailBulk} className='w-[12px] h-[12px]' />
-                            <p className='font-semibold'>Email Address or Username</p>
+                            <p className='font-semibold'>Email Address</p>
                         </label>
                         <input id='email' name='email' type='email' required autoComplete='email' placeholder='Email'
                             className='w-full rounded-full p-4 bg-white border-2 border-slate-950 placeholder:text-gray-500 focus:ring-2 focus:ring-offset-2 focus:ring-slate-950'

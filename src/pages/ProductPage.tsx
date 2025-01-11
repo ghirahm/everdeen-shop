@@ -96,7 +96,9 @@ const ProductPage: React.FC<ProductPageProps> = ({ addToCart }) => {
                         <div className="w-[80%] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 justify-center content-center">
                             {products.map((product) => (
                                 <div key={product.id} onClick={() => handleCardClick(product.id)} className="w-full mx-auto border rounded-lg hover:shadow-md overflow-hidden">
-                                    <img src={product.images[0]} alt={product.title} className="w-full h-64 object-cover" />
+                                    <div className='w-full h-64 overflow-hidden'>
+                                    <img src={product.images[0]} alt={product.title} className="w-full h-full object-cover hover:scale-110 duration-300 transition-all ease-in-out" />
+                                    </div>
                                     <div className="h-64 flex flex-col justify-between p-10">
                                         <div className='flex flex-col gap-2'>
                                             <h3 className="text-xl font-semibold uppercase">{product.title}</h3>
